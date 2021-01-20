@@ -54,15 +54,25 @@ Things you may want to cover:
 | - | - | - |
 | user | references | null: false, foreign_key: true |
 | item | references | null: false, foreign_key: true |
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :address
+
+</br>
+
+## addresses Table
+| Column | Type | Options |
+| - | - | - |
 | zip | string | null: false |
 | prefecture_id | integer | null: false |
 | city | string | null: false |
 | house_num | string | null: false |
 | building | string | - |
 | phone_num | string | null: false |
+| purchase | references | null: false, foreign_key: true |
 ### Association
-- belongs_to :user
-- belongs_to :item
+- belongs_to :purchase
 
 </br>
 </br>
