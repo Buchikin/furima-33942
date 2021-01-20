@@ -8,10 +8,10 @@ class User < ApplicationRecord
   validates_format_of :encrypted_password, with: PASSWORD_REGEX
 
   validates :nickname, presence: true
-  validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥]/+\z }
-  validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥]/+\z }
-  validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]/+\z }
-  validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]/+\z }
+  validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥]+\z/ }
+  validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥]+\z/ }
+  validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
+  validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :birth_day, presence: true
 
 
