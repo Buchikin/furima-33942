@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze  #半角英数どちらも含む
-  validates_format_of :password, with: PASSWORD_REGEX, message: "must be included both letters and numbers"
+  validates_format_of :password, with: PASSWORD_REGEX, message: "must be included both letter(Half-width) and number"
 
   with_options presence: true do
     validates :nickname
