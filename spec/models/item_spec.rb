@@ -42,50 +42,90 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category must be selected") 
       end
+      it "category_idが空では登録できない" do
+        @item.category_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank") 
+      end
       it "condition_idが０(選択されていない状態)では登録できない" do
         @item.condition_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition must be selected") 
+      end
+      it "condition_idが空では登録できない" do
+        @item.condition_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank") 
       end
       it "charge_idが０(選択されていない状態)では登録できない" do
         @item.charge_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Charge must be selected") 
       end
+      it "charge_idが空では登録できない" do
+        @item.charge_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Charge can't be blank") 
+      end
       it "prefecture_idが０(選択されていない状態)では登録できない" do
         @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture must be selected") 
+      end
+      it "prefecture_idが空では登録できない" do
+        @item.prefecture_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank") 
       end
       it "ship_day_idが０(選択されていない状態)では登録できない" do
         @item.ship_day_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Ship day must be selected") 
       end
-      it "priceが¥300~¥9,999,999の間でなければ出品できない" do
-        @item.price = 100
+      it "ship_day_idが空では登録できない" do
+        @item.ship_day_id = ""
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be 300~9999999") 
-      end
-      it "priceが整数で入力されなければ出品できない" do
-        @item.price = 500.55
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be Integer") 
-      end
-      it "priceが半角数字で入力されなければ出品できない" do
-        @item.price = "５０００"  #全角で入力しています
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be Half-width numbers") 
+        expect(@item.errors.full_messages).to include("Ship day can't be blank") 
       end
       it "userが紐づいていないと出品できない" do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("User must exist") 
       end
+
+      describe "price関連" do
+        it "priceが¥300を下回ると出品できない" do
+          @item.price = 100
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be 300~9999999") 
+        end
+        it "priceが¥9,999,999を上回ると出品できない" do
+          @item.price = 10000000
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be 300~9999999") 
+        end
+        it "priceが整数で入力されなければ出品できない" do
+          @item.price = 500.55
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be Integer") 
+        end
+        it "priceが半角英数字混合で入力されると出品できない" do
+          @item.price = "abcd1234"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be Half-width numbers") 
+        end
+        it "priceが半角英字で入力されると出品できない" do
+          @item.price = "abcdef"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be Half-width numbers") 
+        end
+        it "priceが全角数字で入力されると出品できない" do
+          @item.price = "５０００"  #全角で入力しています
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be Half-width numbers") 
+        end
+      end
+
     end
   end
-
-
-
-
 end
