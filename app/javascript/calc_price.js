@@ -9,8 +9,8 @@ function calc_price (){
       taxPrice.innerHTML = `${tax}`;
       profit.innerHTML = `${gain}`;
     } else {
-      taxPrice.innerHTML = "整数で入力してください";
-      profit.innerHTML = "整数で入力してください";
+      taxPrice.innerHTML = "半角整数で入力";
+      profit.innerHTML = "半角整数で入力";
     }
   });
 }
