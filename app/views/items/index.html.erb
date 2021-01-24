@@ -128,7 +128,7 @@
       <% if Item.exists? %>
         <% @items.each do |item| %> <%# 商品がある場合 %>
           <li class='list'>
-            <%= link_to "item_path(item)" do %>
+            <%= link_to item_path(item.id) do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
 
