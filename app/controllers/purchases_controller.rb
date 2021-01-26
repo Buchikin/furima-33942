@@ -11,6 +11,7 @@ class PurchasesController < ApplicationController
     binding.pry
     @order = Order.new(purchase_params)
     if @order.valid?
+      pay_item
       @order.save
     else
       render action: :new
@@ -30,5 +31,14 @@ class PurchasesController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: purchase_params[:price],
+        card: purchase_params[:token],
+        currency: 'jpy'
+      )
   end
 end
