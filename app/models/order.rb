@@ -1,6 +1,6 @@
 class Order
   include ActiveModel::Model
-  attr_accessor :zip, :prefecture_id, :city, :house_num, :building, :phone_num, :user_id, :item_id
+  attr_accessor :zip, :prefecture_id, :city, :house_num, :building, :phone_num, :user_id, :item_id, :price, :token
 
   with_options presence: true do
     validates :zip, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "must be Half-width numbers and included hyphen(-)" }
@@ -8,6 +8,8 @@ class Order
     validates :city
     validates :house_num
     validates :phone_num, numericality: { with: /\A[0-9]+\z/, message: "must be Half-width numbers"}
+    validates :token
+    validates :price
   end
 
   def save
