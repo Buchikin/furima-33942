@@ -8,6 +8,7 @@ class PurchasesController < ApplicationController
   end
 
   def create
+    binding.pry
     @order = Order.new(purchase_params)
     if @order.valid?
       @order.save
@@ -18,7 +19,7 @@ class PurchasesController < ApplicationController
 
     private
   def purchase_params
-    params.require(:order).permit(:zip, :prefecture_id, :city, :house_num, :building, :phone_num).merge(user_id: current_user.id, item_id: @item.id) 
+    params.require(:order).permit(:zip, :prefecture_id, :city, :house_num, :building, :phone_num).merge(user_id: current_user.id, item_id: @item.id, price: @item.price, token: params[:token]) 
   end
 
   def move_to_index
