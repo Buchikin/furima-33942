@@ -10,4 +10,9 @@ class Order
     validates :phone_num, numericality: { with: /\A[0-9]+\z/, message: "must be Half-width numbers"}
   end
 
+  def save
+    purchase = Purchase.create(user_id: user_id, item_id: item_id)
+    Address.create(zip: zip, prefecture_id: prefecture_id, city: city, house_num: house_num, building: building, phone_num: phone_num, purchase_id: purchase.id)
+  end
+
 end
