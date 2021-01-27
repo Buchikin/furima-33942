@@ -1,7 +1,6 @@
 FactoryBot.define do
   Faker::Config.locale = :ja
   factory :order do
-    price {3000}
     token {"tok_abcdefghijk00000000000000000"}
     zip {Faker::Address.zip}
     prefecture_id {Random.rand(1 .. 47)}

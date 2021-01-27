@@ -18,11 +18,6 @@ RSpec.describe Order, type: :model do
     end
 
     context '商品購入処理がうまくいかないとき' do
-      it 'priceが空だと保存できないこと' do
-        @order.price = ""
-        @order.valid?
-        expect(@order.errors.full_messages).to include("Price can't be blank") 
-      end
       it 'tokenが空だと保存できないこと' do
         @order.token = ""
         @order.valid?
@@ -34,7 +29,7 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Zip can't be blank") 
       end
       it 'zipに"-(ハイフン)"が含まれていないと保存できないこと' do
-        @order.zip = 0000000
+        @order.zip = "0000000"
         @order.valid?
         expect(@order.errors.full_messages).to include("Zip must be Half-width numbers and included hyphen(-)") 
       end
@@ -87,6 +82,11 @@ RSpec.describe Order, type: :model do
         @order.phone_num = "abcdefghijk"
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone num must be Half-width numbers") 
+      end
+      it 'phone_numが12桁以上だと保存できないこと' do
+        @order.phone_num = 123456789012
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone num must be 11 digits or less") 
       end
       it 'user_idが空だと保存できないこと' do
         @order.user_id = nil
