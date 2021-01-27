@@ -7,7 +7,7 @@ class Order
     validates :prefecture_id, numericality: { other_than: 0, message: "must be selected" }
     validates :city
     validates :house_num
-    validates :phone_num, numericality: { with: /\A[0-9]{,11}+\z/, message: "must be Half-width numbers and 11 digits or less"}
+    validates :phone_num, numericality: { with: /\A[0-9]+\z/, message: "must be Half-width numbers"}, length: { maximum: 11, message: "must be 11 digits or less" }
     validates :token
     validates :user_id
     validates :item_id
