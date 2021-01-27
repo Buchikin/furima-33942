@@ -9,7 +9,6 @@ class Order
     validates :house_num
     validates :phone_num, numericality: { with: /\A[0-9]+\z/, message: "must be Half-width numbers"}
     validates :token
-    validates :price
     validates :user_id
     validates :item_id
 
